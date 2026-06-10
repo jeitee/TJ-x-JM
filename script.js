@@ -290,12 +290,13 @@ function launchConfetti() {
 }
 
 /* ==========================================================
-   FLOATING SUNFLOWER PETALS CANVAS ENGINE
+   FLOATING SAGE LEAVES + ROSE PETALS
 ========================================================== */
 
 const canvas = document.getElementById("petalCanvas");
 
 if (canvas) {
+
     const ctx = canvas.getContext("2d");
     let petals = [];
 
@@ -307,76 +308,240 @@ if (canvas) {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    class SunflowerPetal {
+    class FloatingElement {
+
         constructor() {
+
+            this.type =
+                Math.random() < 0.7
+                    ? "leaf"
+                    : "rose";
+
             this.reset();
         }
 
         reset() {
+
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * -canvas.height;
-            // Sunflower petals are slightly elongated
-            this.width = 6 + Math.random() * 8;
-            this.length = this.width * 2.5;
-            this.speed = 1 + Math.random() * 1.5;
-            this.swing = 0.5 + Math.random() * 1.5;
-            this.angle = Math.random() * Math.PI;
-            this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+
+            if (this.type === "leaf") {
+
+                this.width =
+                    8 + Math.random() * 8;
+
+                this.length =
+                    this.width * 2.8;
+
+            } else {
+
+                this.width =
+                    6 + Math.random() * 6;
+
+                this.length =
+                    this.width * 2.1;
+            }
+
+            this.speed =
+                0.8 + Math.random() * 1.4;
+
+            this.swing =
+                0.5 + Math.random() * 1.5;
+
+            this.angle =
+                Math.random() * Math.PI;
+
+            this.rotationSpeed =
+                (Math.random() - 0.5) * 0.015;
         }
 
         update() {
-            this.y += this.speed;
-            this.x += Math.sin(this.y * 0.015) * this.swing;
-            this.angle += this.rotationSpeed;
 
-            if (this.y > canvas.height + 40) {
+            this.y += this.speed;
+
+            this.x +=
+                Math.sin(this.y * 0.015)
+                * this.swing;
+
+            this.angle +=
+                this.rotationSpeed;
+
+            if (
+                this.y >
+                canvas.height + 50
+            ) {
                 this.reset();
             }
         }
 
-        draw() {
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            ctx.rotate(this.angle);
+        drawLeaf() {
 
-            // Create a rich dual-tone gradient mapping a true sunflower leaf (Deep orange base to vibrant gold tip)
-            const gradient = ctx.createLinearGradient(0, 0, 0, this.length);
-            gradient.addColorStop(0, "rgba(223, 142, 29, 0.9)");  // Warm orange base
-            gradient.addColorStop(0.4, "rgba(255, 210, 40, 0.85)"); // Vibrant golden core
-            gradient.addColorStop(1, "rgba(255, 230, 100, 0.75)"); // Light golden tip
+            const gradient =
+                ctx.createLinearGradient(
+                    0,
+                    0,
+                    0,
+                    this.length
+                );
+
+            gradient.addColorStop(
+                0,
+                "rgba(110,127,101,0.9)"
+            );
+
+            gradient.addColorStop(
+                0.5,
+                "rgba(163,184,153,0.85)"
+            );
+
+            gradient.addColorStop(
+                1,
+                "rgba(220,235,220,0.7)"
+            );
 
             ctx.fillStyle = gradient;
+
             ctx.beginPath();
 
-            // Draws an authentic pointed organic sunflower petal curve
             ctx.moveTo(0, 0);
-            ctx.quadraticCurveTo(this.width, this.length * 0.35, this.width * 0.3, this.length);
-            ctx.lineTo(0, this.length + 3); // Pointed tip
-            ctx.quadraticCurveTo(-this.width * 0.3, this.length, -this.width, this.length * 0.35);
-            ctx.closePath();
+
+            ctx.quadraticCurveTo(
+                this.width,
+                this.length * 0.4,
+                0,
+                this.length
+            );
+
+            ctx.quadraticCurveTo(
+                -this.width,
+                this.length * 0.4,
+                0,
+                0
+            );
 
             ctx.fill();
+        }
+
+        drawRose() {
+
+            const gradient =
+                ctx.createLinearGradient(
+                    0,
+                    0,
+                    0,
+                    this.length
+                );
+
+            gradient.addColorStop(
+                0,
+                "rgba(214,82,120,0.95)"
+            );
+
+            gradient.addColorStop(
+                0.5,
+                "rgba(240,120,150,0.85)"
+            );
+
+            gradient.addColorStop(
+                1,
+                "rgba(255,190,210,0.7)"
+            );
+
+            ctx.fillStyle = gradient;
+
+            ctx.beginPath();
+
+            ctx.moveTo(0, 0);
+
+            ctx.bezierCurveTo(
+                this.width,
+                -this.width,
+                this.width * 1.5,
+                this.length * 0.5,
+                0,
+                this.length
+            );
+
+            ctx.bezierCurveTo(
+                -this.width * 1.5,
+                this.length * 0.5,
+                -this.width,
+                -this.width,
+                0,
+                0
+            );
+
+            ctx.fill();
+        }
+
+        draw() {
+
+            ctx.save();
+
+            ctx.translate(
+                this.x,
+                this.y
+            );
+
+            ctx.rotate(
+                this.angle
+            );
+
+            if (
+                this.type === "leaf"
+            ) {
+
+                this.drawLeaf();
+
+            } else {
+
+                this.drawRose();
+            }
+
             ctx.restore();
         }
     }
 
-    const petalCount =
-        window.innerWidth < 768 ? 20 : 40;
+    const particleCount =
+        window.innerWidth < 768
+            ? 20
+            : 40;
 
-    for (let i = 0; i < petalCount; i++) {
-        petals.push(new SunflowerPetal());
+    for (
+        let i = 0;
+        i < particleCount;
+        i++
+    ) {
+
+        petals.push(
+            new FloatingElement()
+        );
     }
 
-    function animatePetals() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        petals.forEach(p => {
-            p.update();
-            p.draw();
-        });
-        requestAnimationFrame(animatePetals);
+    function animate() {
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        petals.forEach(
+            petal => {
+
+                petal.update();
+                petal.draw();
+
+            }
+        );
+
+        requestAnimationFrame(
+            animate
+        );
     }
 
-    animatePetals();
+    animate();
 }
 
 /* ==========================================================
