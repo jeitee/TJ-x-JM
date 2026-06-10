@@ -122,8 +122,8 @@ if (musicBtn && music) {
     musicBtn.addEventListener("click", () => {
         if (!isPlaying) {
             // Explicitly tell Chrome to load the file on click interaction
-            music.load(); 
-            
+            music.load();
+
             // Handle Chrome's autoplay promise
             music.play()
                 .then(() => {
@@ -244,7 +244,7 @@ if (rsvpForm) {
             fetch(GOOGLE_FORM_URL, {
                 method: "POST",
                 body: JSON.stringify(data)
-            }).catch(() => {});
+            }).catch(() => { });
         }
 
         launchConfetti();
@@ -270,7 +270,7 @@ function launchConfetti() {
         confetti.style.position = "fixed";
         confetti.style.width = "10px";
         confetti.style.height = "10px";
-        
+
         // Colors updated from [Gold, Blush, White] to match CSS: [Gold, Sage Green, White]
         confetti.style.background = ["#D4AF37", "#A3B899", "#FFFFFF"][Math.floor(Math.random() * 3)];
         confetti.style.borderRadius = "50%";
@@ -317,7 +317,7 @@ if (canvas) {
             this.y = Math.random() * -canvas.height;
             // Sunflower petals are slightly elongated
             this.width = 6 + Math.random() * 8;
-            this.length = this.width * 2.5; 
+            this.length = this.width * 2.5;
             this.speed = 1 + Math.random() * 1.5;
             this.swing = 0.5 + Math.random() * 1.5;
             this.angle = Math.random() * Math.PI;
@@ -347,20 +347,23 @@ if (canvas) {
 
             ctx.fillStyle = gradient;
             ctx.beginPath();
-            
+
             // Draws an authentic pointed organic sunflower petal curve
-            ctx.moveTo(0, 0); 
-            ctx.quadraticCurveTo(this.width, this.length * 0.35, this.width * 0.3, this.length); 
+            ctx.moveTo(0, 0);
+            ctx.quadraticCurveTo(this.width, this.length * 0.35, this.width * 0.3, this.length);
             ctx.lineTo(0, this.length + 3); // Pointed tip
             ctx.quadraticCurveTo(-this.width * 0.3, this.length, -this.width, this.length * 0.35);
             ctx.closePath();
-            
+
             ctx.fill();
             ctx.restore();
         }
     }
 
-    for (let i = 0; i < 55; i++) {
+    const petalCount =
+        window.innerWidth < 768 ? 20 : 40;
+
+    for (let i = 0; i < petalCount; i++) {
         petals.push(new SunflowerPetal());
     }
 
@@ -419,39 +422,39 @@ const sections = [
 let currentSection = 0;
 let isScrolling = false;
 
-window.addEventListener(
-    "wheel",
-    (e) => {
+// window.addEventListener(
+//     "wheel",
+//     (e) => {
 
-        if (isScrolling) {
-            e.preventDefault();
-            return;
-        }
+//         if (isScrolling) {
+//             e.preventDefault();
+//             return;
+//         }
 
-        if (e.deltaY > 0) {
-            currentSection = Math.min(
-                currentSection + 1,
-                sections.length - 1
-            );
-        } else {
-            currentSection = Math.max(
-                currentSection - 1,
-                0
-            );
-        }
+//         if (e.deltaY > 0) {
+//             currentSection = Math.min(
+//                 currentSection + 1,
+//                 sections.length - 1
+//             );
+//         } else {
+//             currentSection = Math.max(
+//                 currentSection - 1,
+//                 0
+//             );
+//         }
 
-        isScrolling = true;
+//         isScrolling = true;
 
-        sections[currentSection].scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+//         sections[currentSection].scrollIntoView({
+//             behavior: "smooth",
+//             block: "start"
+//         });
 
-        setTimeout(() => {
-            isScrolling = false;
-        }, 900);
+//         setTimeout(() => {
+//             isScrolling = false;
+//         }, 900);
 
-        e.preventDefault();
-    },
-    { passive: false }
-);
+//         e.preventDefault();
+//     },
+//     { passive: false }
+// );
