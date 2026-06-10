@@ -82,13 +82,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const scrollBtn = document.getElementById("scrollTopBtn");
 
 window.addEventListener("scroll", () => {
-    if (!scrollBtn) return;
 
-    if (window.scrollY > 500) {
-        scrollBtn.classList.add("show");
-    } else {
-        scrollBtn.classList.remove("show");
-    }
+    let closest = 0;
+    let smallestDistance = Infinity;
+
+    sections.forEach((section, index) => {
+
+        const distance = Math.abs(
+            section.getBoundingClientRect().top
+        );
+
+        if (distance < smallestDistance) {
+            smallestDistance = distance;
+            closest = index;
+        }
+    });
+
+    currentSection = closest;
 });
 
 if (scrollBtn) {
@@ -400,3 +410,48 @@ document.querySelectorAll(".hero-content *").forEach((el, index) => {
 /* ==========================================================
    END
 ========================================================== */
+const sections = [
+    ...document.querySelectorAll(
+        '.hero, .section, .venue-section, .thankyou-section'
+    )
+];
+
+let currentSection = 0;
+let isScrolling = false;
+
+window.addEventListener(
+    "wheel",
+    (e) => {
+
+        if (isScrolling) {
+            e.preventDefault();
+            return;
+        }
+
+        if (e.deltaY > 0) {
+            currentSection = Math.min(
+                currentSection + 1,
+                sections.length - 1
+            );
+        } else {
+            currentSection = Math.max(
+                currentSection - 1,
+                0
+            );
+        }
+
+        isScrolling = true;
+
+        sections[currentSection].scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+        setTimeout(() => {
+            isScrolling = false;
+        }, 900);
+
+        e.preventDefault();
+    },
+    { passive: false }
+);

@@ -47,6 +47,11 @@
 
 html{
     scroll-behavior:smooth;
+    scroll-snap-type:y mandatory;
+}
+
+body{
+    scroll-snap-type:y mandatory;
 }
 
 body{
@@ -81,8 +86,13 @@ button{
     margin:auto;
 }
 
-.section{
-    padding:120px 0;
+.hero,
+.section,
+.venue-section,
+.thankyou-section{
+    min-height:100vh;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
 }
 
 /* ==========================================================
@@ -325,7 +335,7 @@ button{
     font-family:
         'Cormorant Garamond',
         serif;
-    font-size:7rem;
+    font-size:9rem;
     color:var(--white);
     margin-bottom:20px;
     text-shadow: 0 4px 10px rgba(0,0,0,0.15);
