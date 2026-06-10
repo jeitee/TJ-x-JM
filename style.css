@@ -417,6 +417,39 @@ button{
     animation:
         fadeUp 1.8s ease;
 }
+.bible-verse {
+    margin-top: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.88);
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    letter-spacing: 0.4px;
+
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeInVerse 1.5s ease forwards;
+    animation-delay: 1.2s;
+}
+
+.bible-verse span {
+    display: block;
+    margin-top: 8px;
+    font-style: normal;
+    font-size: 0.95rem;
+    opacity: 0.75;
+}
+
+@keyframes fadeInVerse {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 /* ==========================================================
    BUTTONS
