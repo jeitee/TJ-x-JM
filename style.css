@@ -231,13 +231,16 @@ button{
         1px solid rgba(163,184,153,.15);
 }
 
-.nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;          /* Slightly bumped up size */
-    font-weight: 700;           /* Makes the thin serif lines thicker and bolder */
-    letter-spacing: 1px;        /* Adds tiny breathing room between letters */
-    color: var(--artichoke);    /* Uses your deep green for maximum legibility */
-    transition: color 0.3s ease;
+.navbar-logo{
+    height:clamp(45px, 6vw, 65px);
+    width:auto;
+    display:block;
+    object-fit:contain;
+    transition:transform .3s ease;
+}
+
+.navbar-logo:hover{
+    transform:scale(1.05);
 }
 
 .nav-links{
@@ -335,19 +338,21 @@ button{
         fadeUp 1.2s ease;
 }
 
-.hero-monogram{
-    font-family:
-        'Cormorant Garamond',
-        serif;
+.hero-monogram {
+    font-family: 'Cormorant Garamond', serif;
 
-    font-size:clamp(3rem,8vw,7rem);
+    font-size: clamp(2.5rem, 7vw, 6.5rem);
+    line-height: 1.1;
+    letter-spacing: 0.05em;
 
-    color:var(--white);
-    margin-bottom:20px;
+    color: var(--white);
+    margin-bottom: clamp(12px, 2vw, 24px);
+
+    text-align: center;
+
     text-shadow: 0 4px 10px rgba(0,0,0,0.15);
 
-    animation:
-        zoomIn 1.5s ease;
+    animation: zoomIn 1.5s ease;
 }
 
 .couple-name{
@@ -1096,9 +1101,10 @@ footer{
     .mobile-menu-btn{
         display:block;
     }
-.hero-monogram{
-    font-size:clamp(3rem,8vw,7rem);
-}
+    .hero-monogram{
+        margin-bottom:20px;
+        animation:zoomIn 1.5s ease;
+    }
     .couple-name{
         font-size:2.5rem;
     }
@@ -1142,8 +1148,9 @@ footer{
         letter-spacing: 3px;
     }
 
-    .hero-monogram{
-    font-size:clamp(3rem,8vw,7rem);
+   .hero-monogram{
+    margin-bottom:20px;
+    animation:zoomIn 1.5s ease;
 }
 
     .couple-name{
@@ -1158,7 +1165,8 @@ footer{
 
 @media(max-width:480px){
     .hero-monogram{
-    font-size:clamp(3rem,8vw,7rem);
+    margin-bottom:20px;
+    animation:zoomIn 1.5s ease;
 }
     .couple-name{
         font-size:2rem;
@@ -1200,7 +1208,8 @@ footer{
 }
 
 .hero-monogram{
-    font-size:clamp(3rem,8vw,7rem);
+    margin-bottom:20px;
+    animation:zoomIn 1.5s ease;
 }
 
 .couple-name{
@@ -1211,3 +1220,4 @@ footer{
 .hero-date{
     font-size:1rem;
 }
+
