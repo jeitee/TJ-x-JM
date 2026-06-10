@@ -76,22 +76,32 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 /* ==========================================================
-   SCROLL TO TOP
+    SECTIONS & SCROLL TO TOP
 ========================================================== */
 
+const sections = [
+    ...document.querySelectorAll(
+        '.hero, .section, .venue-section, .thankyou-section'
+    )
+];
+
+let currentSection = 0;
 const scrollBtn = document.getElementById("scrollTopBtn");
 
 window.addEventListener("scroll", () => {
+    // Show/hide scroll to top button
+    if (window.scrollY > 500) {
+        scrollBtn?.classList.add("show");
+    } else {
+        scrollBtn?.classList.remove("show");
+    }
 
+    // Track current section for potential future use
     let closest = 0;
     let smallestDistance = Infinity;
 
     sections.forEach((section, index) => {
-
-        const distance = Math.abs(
-            section.getBoundingClientRect().top
-        );
-
+        const distance = Math.abs(section.getBoundingClientRect().top);
         if (distance < smallestDistance) {
             smallestDistance = distance;
             closest = index;
@@ -99,7 +109,7 @@ window.addEventListener("scroll", () => {
     });
 
     currentSection = closest;
-});
+}, { passive: true });
 
 if (scrollBtn) {
     scrollBtn.addEventListener("click", () => {
@@ -544,20 +554,24 @@ if (canvas) {
     animate();
 }
 /* ==========================================================
-   GALLERY SWIPE SUPPORT
+    GALLERY SWIPE SUPPORT
 ========================================================== */
 
-let touchStartX = 0;
-let touchEndX = 0;
+let touchStartY = 0;
+let touchEndY = 0;
 
-if (lightboxImage) {
-    lightboxImage.addEventListener("touchstart", e => {
-        touchStartX = e.changedTouches[0].screenX;
-    });
+if (lightbox) {
+    lightbox.addEventListener("touchstart", e => {
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
 
-    lightboxImage.addEventListener("touchend", e => {
-        touchEndX = e.changedTouches[0].screenX;
-    });
+    lightbox.addEventListener("touchend", e => {
+        touchEndY = e.changedTouches[0].screenY;
+        // Close lightbox on downward swipe
+        if (touchEndY - touchStartY > 50) {
+            lightbox.classList.remove("active");
+        }
+    }, { passive: true });
 }
 
 /* ==========================================================
@@ -575,50 +589,5 @@ document.querySelectorAll(".hero-content *").forEach((el, index) => {
 });
 
 /* ==========================================================
-   END
+    END
 ========================================================== */
-const sections = [
-    ...document.querySelectorAll(
-        '.hero, .section, .venue-section, .thankyou-section'
-    )
-];
-
-let currentSection = 0;
-let isScrolling = false;
-
-// window.addEventListener(
-//     "wheel",
-//     (e) => {
-
-//         if (isScrolling) {
-//             e.preventDefault();
-//             return;
-//         }
-
-//         if (e.deltaY > 0) {
-//             currentSection = Math.min(
-//                 currentSection + 1,
-//                 sections.length - 1
-//             );
-//         } else {
-//             currentSection = Math.max(
-//                 currentSection - 1,
-//                 0
-//             );
-//         }
-
-//         isScrolling = true;
-
-//         sections[currentSection].scrollIntoView({
-//             behavior: "smooth",
-//             block: "start"
-//         });
-
-//         setTimeout(() => {
-//             isScrolling = false;
-//         }, 900);
-
-//         e.preventDefault();
-//     },
-//     { passive: false }
-// );

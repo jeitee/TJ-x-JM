@@ -1198,32 +1198,8 @@ footer{
     padding:20px;
     border-radius:20px;
     box-shadow:0 15px 40px rgba(0,0,0,.15);
-}
-.hero{
-        padding-top:100px;
-        justify-content:flex-start;
-    }
-
-.hero-content{
-    margin-top:20px;
-}
-
-.hero-subtitle{
-    font-size:.8rem;
-    letter-spacing:4px;
-}
-
-.hero-monogram{
-    margin-bottom:20px;
-    animation:zoomIn 1.5s ease;
-}
-
-.couple-name{
-    font-size:1.8rem;
-    line-height:1.15;
-}
-
-.hero-date{
-    font-size:1rem;
+    width: calc(100% - 40px);
+    max-width: 300px;
+    z-index: 1000;
 }
 
