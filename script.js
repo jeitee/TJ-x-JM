@@ -21,12 +21,26 @@ AOS.init({
 window.addEventListener("load", () => {
     const loader = document.getElementById("loader");
 
+    // Stage 1: reveal envelope moment
     setTimeout(() => {
+        loader.classList.add("stage-open");
+    }, 1200);
+
+    // Stage 2: hold cinematic moment
+    setTimeout(() => {
+        loader.classList.add("stage-hold");
+    }, 2600);
+
+    // Stage 3: fade out like film cut
+    setTimeout(() => {
+        loader.style.transition = "opacity 1.2s ease";
         loader.style.opacity = "0";
-        setTimeout(() => {
-            loader.style.display = "none";
-        }, 1000);
-    }, 2500);
+    }, 3800);
+
+    // Stage 4: remove
+    setTimeout(() => {
+        loader.style.display = "none";
+    }, 5200);
 });
 
 /* ==========================================================

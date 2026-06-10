@@ -101,100 +101,132 @@ button{
     z-index:0;
     user-select:none;
 }
-
-/* ==========================================================
-   LOADER
-========================================================== */
+/* =========================
+   LOADER BASE (upgrade feel)
+========================= */
 
 #loader{
     position:fixed;
     inset:0;
-    background:var(--ivory);
+    background: radial-gradient(circle at center, #fffaf3, var(--ivory));
     display:flex;
     justify-content:center;
     align-items:center;
     z-index:99999;
-    transition:1s;
+    transition:1s ease;
 }
 
+/* subtle breathing motion */
 .loader-content{
-    position:relative;
+    animation:floatLoader 4s ease-in-out infinite;
 }
 
-/* ==========================================================
-   ENVELOPE
-========================================================== */
+@keyframes floatLoader{
+    0%,100%{ transform: translateY(0px); }
+    50%{ transform: translateY(-8px); }
+}
+
+/* =========================
+   ENVELOPE DEPTH SYSTEM
+========================= */
 
 .envelope{
     width:320px;
     height:220px;
     position:relative;
-    perspective:1000px;
+    perspective:1200px;
+    filter: drop-shadow(0 30px 40px rgba(0,0,0,0.12));
 }
 
+/* BACK */
+.envelope-back{
+    position:absolute;
+    inset:0;
+    background: linear-gradient(145deg, #d8e2dc, #b7c4b8);
+    border-radius:6px;
+    z-index:0;
+}
+
+/* FRONT POCKET */
+.envelope-front{
+    position:absolute;
+    inset:0;
+    background: linear-gradient(145deg, #cbd5c0, #a9b7a5);
+
+    /* FIX: make it a real envelope pocket */
+    clip-path: polygon(0 100%, 50% 45%, 100% 100%, 100% 100%, 0 100%);
+
+    z-index:1; /* ⬅ LOWER than letter */
+    pointer-events:none;
+}
+
+/* LETTER */
 .letter{
     position:absolute;
     width:280px;
     height:180px;
     left:20px;
-    top:15px;
+    top:20px;
     background:white;
     border-radius:12px;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    z-index:1;
-    animation:letterReveal 2s ease forwards;
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.1);
+    z-index:2;
+
+    transform: translateY(30px);
+    opacity:0;
+
+    animation:letterReveal 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    box-shadow:0 25px 60px rgba(0,0,0,.12);
 }
 
+/* MONOGRAM */
 .loader-monogram{
-    font-family:
-        'Cormorant Garamond',
-        serif;
-    font-size:2.8rem;
+    font-family:'Cormorant Garamond', serif;
+    font-size:3rem;
     color:var(--gold);
-    margin-bottom:10px;
+    letter-spacing:2px;
+    text-shadow:0 0 20px rgba(212,175,55,0.15);
 }
 
-.letter p{
-    color:var(--text-secondary);
-    letter-spacing:3px;
-    text-transform:uppercase;
-    font-size:.8rem;
-}
-
+/* FLAP (more realistic movement) */
 .envelope-flap{
     position:absolute;
     width:0;
     height:0;
     border-left:160px solid transparent;
     border-right:160px solid transparent;
-    border-top:120px solid var(--sage); /* Changed to Sage envelope look */
+    border-top:120px solid var(--sage);
     top:0;
     transform-origin:top center;
-    animation:openFlap 2s ease forwards;
     z-index:5;
+
+    animation:openFlap 2.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
+/* smoother cinematic flap */
 @keyframes openFlap{
     0%{
-        transform:rotateX(0deg);
+        transform: rotateX(0deg);
+    }
+    40%{
+        transform: rotateX(-110deg);
     }
     100%{
-        transform:rotateX(-180deg);
+        transform: rotateX(-160deg);
     }
 }
 
+/* letter rise */
 @keyframes letterReveal{
     0%{
-        transform:translateY(40px);
+        transform: translateY(40px) scale(0.98);
         opacity:0;
     }
     100%{
-        transform:translateY(-40px);
+        transform: translateY(-20px) scale(1);
         opacity:1;
     }
 }
