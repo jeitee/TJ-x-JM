@@ -332,7 +332,7 @@ button{
     display:block;
     letter-spacing:6px;
     margin-bottom:20px;
-    font-size:.85rem;
+    font-size:.95rem;
     text-transform:uppercase;
     animation:
         fadeUp 1.2s ease;
@@ -353,6 +353,12 @@ button{
     text-shadow: 0 4px 10px rgba(0,0,0,0.15);
 
     animation: zoomIn 1.5s ease;
+}
+.hero-logo {
+    width: clamp(140px, 35vw, 320px);
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .couple-name{
@@ -1144,8 +1150,8 @@ footer{
     }
 
     .hero-subtitle{
-        font-size: .7rem;
-        letter-spacing: 3px;
+        font-size: .8rem;
+        letter-spacing: 4px;
     }
 
    .hero-monogram{
@@ -1203,8 +1209,8 @@ footer{
 }
 
 .hero-subtitle{
-    font-size:.7rem;
-    letter-spacing:2px;
+    font-size:.8rem;
+    letter-spacing:4px;
 }
 
 .hero-monogram{
