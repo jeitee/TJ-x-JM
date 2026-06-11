@@ -75,18 +75,17 @@ button{
     border:none;
 }
 
-.container{
-    width:90%;
-    max-width:var(--container);
-    margin:auto;
+.container {
+    width: 90%;
+    max-width: var(--container);
+    margin: auto;
+    overflow: hidden; /* Acts as a safety net for any grid/flex leaks */
 }
 
 .section{
     padding:120px 0;
 }
-*{
-    outline:1px solid red;
-}
+
 
 /* ==========================================================
    WATERMARK
@@ -125,15 +124,17 @@ button{
    LOADER BASE (upgrade feel)
 ========================= */
 
-#loader{
-    position:fixed;
-    inset:0;
+#loader {
+    position: fixed;
+    inset: 0;
     background: radial-gradient(circle at center, #fffaf3, var(--ivory));
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:99999;
-    transition:1s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    transition: 1s ease;
+    /* ADD THIS line to prevent the flap rotation from breaking boundaries */
+    overflow: hidden; 
 }
 
 /* subtle breathing motion */
@@ -819,10 +820,13 @@ button{
     background:var(--ivory);
 }
 
-.event-timeline{
-    max-width:900px;
-    margin:auto;
-    position:relative;
+.event-timeline {
+    max-width: 900px;
+    margin: auto;
+    position: relative;
+    /* ADD THIS line to catch absolute icons hanging off edges */
+    overflow: hidden; 
+    padding: 20px 0; /* Gives icons a tiny breathing room inside */
 }
 
 .event-timeline::before{
@@ -1415,18 +1419,18 @@ button{
     }
 }
 
-.nav-links.mobile-open{
-    display:flex;
-    flex-direction:column;
-    position:absolute;
-    top:80px;
-    right:20px;
-    background:white;
-    padding:20px;
-    border-radius:20px;
-    box-shadow:0 15px 40px rgba(0,0,0,.15);
-    width: calc(100% - 40px);
-    max-width: 300px;
+.nav-links.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.15);
+    /* CHANGE THIS LINE FOR SAFETY */
+    width: 280px; 
     z-index: 1000;
 }
 
