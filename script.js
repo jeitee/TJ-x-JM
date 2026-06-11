@@ -282,35 +282,39 @@ if (rsvpForm) {
    CONFETTI
 ========================================================== */
 
-function launchConfetti() {
-    const container = document.getElementById("confetti-container");
-    if (!container) return;
+for (let i = 0; i < 120; i++) {
+    const piece = document.createElement("span");
 
-    for (let i = 0; i < 120; i++) {
-        const confetti = document.createElement("span");
-        confetti.className = "confetti-piece";
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.top = "-20px";
-        confetti.style.position = "fixed";
-        confetti.style.width = "10px";
-        confetti.style.height = "10px";
+    const isPetal = Math.random() < 0.5; // 50% chance
 
-        // Colors updated from [Gold, Blush, White] to match CSS: [Gold, Sage Green, White]
-        confetti.style.background = ["#D4AF37", "#A3B899", "#FFFFFF"][Math.floor(Math.random() * 3)];
-        confetti.style.borderRadius = "50%";
-        confetti.style.zIndex = "9999";
-        confetti.style.transition = "transform 4s linear";
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.top = "-20px";
+    piece.style.position = "fixed";
+    piece.style.zIndex = "9999";
+    piece.style.transition = "transform 4s linear";
 
-        container.appendChild(confetti);
-
-        requestAnimationFrame(() => {
-            confetti.style.transform = `translateY(${window.innerHeight + 200}px) rotate(${Math.random() * 720}deg)`;
-        });
-
-        setTimeout(() => {
-            confetti.remove();
-        }, 4500);
+    if (isPetal) {
+        // Petal
+        piece.innerHTML = "🌸";
+        piece.style.fontSize = "18px";
+        piece.style.background = "transparent";
+    } else {
+        // Confetti
+        piece.style.width = "10px";
+        piece.style.height = "10px";
+        piece.style.borderRadius = "50%";
+        piece.style.background =
+            ["#D4AF37", "#A3B899", "#FFFFFF"][Math.floor(Math.random() * 3)];
     }
+
+    container.appendChild(piece);
+
+    requestAnimationFrame(() => {
+        piece.style.transform =
+            `translateY(${window.innerHeight + 200}px) rotate(${Math.random() * 720}deg)`;
+    });
+
+    setTimeout(() => piece.remove(), 4500);
 }
 
 /* ==========================================================
