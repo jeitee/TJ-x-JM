@@ -1899,6 +1899,17 @@ button {
     color: var(--gold);
     margin-top: 35px;
 }
+.cursive-signature{
+    font-family:'Great Vibes', cursive;
+    font-size:2.8rem;
+    color:var(--gold);
+
+    letter-spacing:1px;
+    margin-top:35px;
+    text-align:center;
+
+    text-shadow:0 2px 10px rgba(212,175,55,.15);
+}
 
 /* ==========================================================
    QR FULLSCREEN MODAL
@@ -2204,6 +2215,10 @@ button {
     .qr-modal-content img {
         width: 260px;
     }
+    .cursive-signature{
+        font-size:2.4rem;
+        margin-top:30px;
+    }
 }
 
 /* ==========================================================
@@ -2354,6 +2369,11 @@ button {
     .qr-modal-content img {
         width: 220px;
     }
+
+    .cursive-signature{
+        font-size:2.1rem;
+        margin-top:25px;
+    }
 }
 
 /* ==========================================================
@@ -2479,6 +2499,11 @@ button {
 
     .qr-modal-content img {
         width: 200px;
+    }
+    .cursive-signature{
+        font-size:1.8rem;
+        margin-top:20px;
+        letter-spacing:.5px;
     }
 }
 
