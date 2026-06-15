@@ -376,13 +376,9 @@
         <div class="container">
 
             <div class="section-title" data-aos="fade-up">
-
-                <span class="subtitle">Wedding Information</span>
-
+                <span class="subtitle">Our Wedding</span>
                 <h2>Wedding Details</h2>
-
                 <div class="title-divider"></div>
-
             </div>
 
             <div class="details-grid">
@@ -421,6 +417,23 @@
                     </p>
 
                 </div>
+
+            </div>
+
+            <!-- GLOBAL VIEW DIRECTION BUTTON (OUTSIDE CARDS) -->
+            <div class="details-footer" data-aos="fade-up">
+
+                <p class="venue-note">
+                    Tebeng Rd, Dagupan City, 2400 Pangasinan
+                </p>
+
+                <a href="https://maps.google.com/?q=16.030709880965837,120.35740547801097" target="_blank"
+                    class="btn-primary venue-btn">
+
+                    <i class="fa-solid fa-location-arrow"></i>
+                    View Directions
+
+                </a>
 
             </div>
 
@@ -574,10 +587,10 @@
     </section>
 
     <!-- ====================================== -->
-<!-- GETTING THERE -->
-<!-- ====================================== -->
+    <!-- GETTING THERE -->
+    <!-- ====================================== -->
 
-<section id="venue" class="venue-section parallax-section">
+    <!-- <section id="venue" class="venue-section parallax-section">
 
     <div class="venue-overlay"></div>
 
@@ -620,7 +633,7 @@
 
     </div>
 
-</section>
+</section> -->
 
     <!-- ====================================== -->
     <!-- ENTOURAGE -->
@@ -749,6 +762,8 @@
 
     </section> -->
 
+
+
     <!-- ====================================== -->
     <!-- RSVP -->
     <!-- ====================================== -->
@@ -757,25 +772,70 @@
 
         <div class="container">
 
+            <!-- SECTION HEADER -->
             <div class="section-title" data-aos="fade-up">
 
-                <span>Join Us</span>
+                <span class="subtitle">Join Us</span>
 
-                <h2>
-                    RSVP
-                </h2>
+                <h2>RSVP</h2>
+
+                <div class="title-divider"></div>
 
             </div>
 
-            <button id="openRSVPBtn" class="btn-primary">
+            <!-- RSVP CARD -->
+            <div class="rsvp-card" data-aos="fade-up">
 
-                Confirm Attendance
+                <p class="rsvp-text">
+                    We would be honored to celebrate this special day with you.
+                    Your presence means the world to us.
+                </p>
 
-            </button>
+                <p class="rsvp-question">
+                    Will you be joining us?
+                </p>
+
+                <!-- ACTION BUTTON -->
+                <button id="openRSVPBtn" class="rsvp-btn">
+                    Confirm Attendance
+                </button>
+
+                <!-- ATTIRE -->
+                <div class="info-block">
+
+                    <p class="info-title">Attire</p>
+
+                    <p class="info-text">
+                        Please wear formal attire in our wedding palette:
+                    </p>
+
+                    <div class="color-palette">
+                        <span class="color-swatch beige" title="Beige"></span>
+                        <span class="color-swatch champagne" title="Champagne"></span>
+                        <span class="color-swatch cream" title="Cream"></span>
+                        <span class="color-swatch earth" title="Earth Tones"></span>
+                    </div>
+
+                </div>
+
+                <!-- GIFTS -->
+                <div class="info-block">
+
+                    <p class="info-title">Gifts</p>
+
+                    <p class="info-text">
+                        Your presence is the greatest gift we could ask for.
+                        If you wish to bless us further, a monetary gift would be sincerely appreciated.
+                    </p>
+
+                </div>
+
+            </div>
 
         </div>
 
     </section>
+
 
     <!-- ====================================== -->
     <!-- RSVP MODAL -->
@@ -785,13 +845,13 @@
 
         <div class="modal-content">
 
-            <button class="close-modal">
-                ×
-            </button>
+            <button class="close-modal" id="closeRSVPModal">&times;</button>
 
-            <h2>
-                RSVP Form
-            </h2>
+            <h2>RSVP Form</h2>
+
+            <p class="modal-subtitle">
+                Kindly let us know your response
+            </p>
 
             <form id="rsvpForm">
 
@@ -799,23 +859,22 @@
 
                 <input type="text" placeholder="Contact Number">
 
-                <input type="number" placeholder="Number of Guests">
+                <input type="number" placeholder="Number of Guests" min="1">
 
-                <select>
-                    <option>Attending</option>
-                    <option>Not Attending</option>
+                <select required>
+                    <option value="">Attendance</option>
+                    <option value="attending">Attending</option>
+                    <option value="not_attending">Not Attending</option>
                 </select>
 
-                <input type="text" placeholder="Meal Preference">
+                <input type="text" placeholder="Meal Preference (Optional)">
 
-                <input type="text" placeholder="Song Request">
+                <input type="text" placeholder="Song Request (Optional)">
 
-                <textarea rows="5" placeholder="Message for the Couple"></textarea>
+                <textarea rows="4" placeholder="Message for the Couple (Optional)"></textarea>
 
-                <button type="submit" class="btn-primary">
-
+                <button type="submit" class="rsvp-submit">
                     Submit RSVP
-
                 </button>
 
             </form>
@@ -846,17 +905,37 @@
 
         <div class="container">
 
-            <h2>
-                Thank You
-            </h2>
+            <div class="thankyou-card" data-aos="fade-up">
 
-            <p>
-                Thank you for celebrating our special day with us.
-            </p>
+                <h2>Thank You</h2>
 
-            <h3>
-                Teejei & Judith
-            </h3>
+                <div class="title-divider"></div>
+
+                <p class="thankyou-text">
+                    We are truly grateful to have shared this special day with you.
+                    Your presence meant more to us than words can express.
+                </p>
+
+                <!-- QR SECTION -->
+                <div class="qr-section">
+
+                    <p class="qr-title">Share Your Memories</p>
+
+                    <p class="qr-text">
+                        Scan the QR code to upload your photos and help us preserve these moments.
+                    </p>
+
+                    <div class="qr-box" id="qrBox">
+                        <img src="image/QR.png" alt="Wedding Photo Upload QR Code">
+                    </div>
+
+                </div>
+
+                <h3 class="thankyou-signature">
+                    Teejei & Judith
+                </h3>
+
+            </div>
 
         </div>
 
@@ -888,6 +967,20 @@
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
     <script src="script.js"></script>
+
+    <div id="qrModal" class="qr-modal">
+
+    <div class="qr-modal-content">
+
+        <button class="qr-close">&times;</button>
+
+        <img src="assets/qr-code.png" alt="QR Code Large View">
+
+        <p>Scan to upload your wedding photos</p>
+
+    </div>
+
+</div>
 
 </body>
 

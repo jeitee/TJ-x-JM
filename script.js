@@ -602,6 +602,29 @@ document.querySelectorAll(".hero-content *").forEach((el, index) => {
     }, 400 * index);
 });
 
+// QR FULLSCREEN MODAL
+
+const qrBox = document.getElementById("qrBox");
+const qrModal = document.getElementById("qrModal");
+const qrClose = document.querySelector(".qr-close");
+
+// open modal
+qrBox.addEventListener("click", () => {
+    qrModal.classList.add("active");
+});
+
+// close modal (button)
+qrClose.addEventListener("click", () => {
+    qrModal.classList.remove("active");
+});
+
+// close when clicking outside content
+qrModal.addEventListener("click", (e) => {
+    if (e.target === qrModal) {
+        qrModal.classList.remove("active");
+    }
+});
+
 /* ==========================================================
     END
 ========================================================== */
