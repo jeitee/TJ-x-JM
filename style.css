@@ -2093,12 +2093,22 @@ button{
     }
 
     /* RSVP (NEW) */
+    /* RSVP */
     .rsvp-card{
         padding:45px 35px;
+        max-width:90%;
+    }
+
+    .rsvp-text{
+        font-size:1rem;
     }
 
     .rsvp-question{
         font-size:1.6rem;
+    }
+
+    .rsvp-btn{
+        padding:14px 28px;
     }
 
     .color-palette{
@@ -2109,6 +2119,8 @@ button{
         width:24px;
         height:24px;
     }
+
+    /* QR */
     .qr-modal-content img{
         width:260px;
     }
@@ -2211,6 +2223,11 @@ button{
     /* RSVP (NEW) */
     .rsvp-card{
         padding:40px 25px;
+        max-width:95%;
+    }
+
+    .rsvp-text{
+        font-size:.98rem;
     }
 
     .rsvp-question{
@@ -2219,11 +2236,14 @@ button{
 
     .rsvp-btn{
         width:100%;
+        padding:14px 20px;
     }
 
     .color-palette{
         flex-wrap:wrap;
+        gap:8px;
     }
+
 
     /* Gallery */
     .masonry-gallery{
@@ -2250,6 +2270,25 @@ button{
 ========================================================== */
 
 @media (max-width:480px){
+    .detail-card{
+        padding:35px 22px;
+    }
+
+    .detail-card h3{
+        font-size:1.6rem;
+    }
+
+    .detail-card .highlight{
+        font-size:1rem;
+    }
+
+    .detail-card .location{
+        font-size:.95rem;
+    }
+
+    .detail-card .venue-note{
+        font-size:.85rem;
+    }
 
     .hero-monogram{
         margin-bottom:20px;
@@ -2299,16 +2338,24 @@ button{
     }
 
     /* RSVP (NEW) */
+    /* RSVP */
     .rsvp-card{
-        padding:30px 20px;
+        padding:30px 18px;
+        border-radius:22px;
     }
 
     .rsvp-text{
-        font-size:.95rem;
+        font-size:.92rem;
+        line-height:1.6;
     }
 
     .rsvp-question{
         font-size:1.3rem;
+    }
+
+    .rsvp-btn{
+        width:100%;
+        padding:13px 18px;
     }
 
     .color-swatch{
@@ -2322,12 +2369,14 @@ button{
         opacity:.05;
         filter:blur(.4px);
     }
+    
+    /* QR MODAL */
     .qr-modal-content{
-        padding:25px 20px;
+        padding:22px 18px;
     }
 
     .qr-modal-content img{
-        width:220px;
+        width:200px;
     }
 }
 
