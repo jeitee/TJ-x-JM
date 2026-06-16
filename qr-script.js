@@ -91,35 +91,105 @@ previewAllBtn.addEventListener("click", () => {
 /* =========================
    UPLOAD FLOW
 ========================= */
-uploadBtn.addEventListener("click", () => {
+const scriptURL = "https://script.google.com/macros/s/AKfycbwhvpQXMZn_4rAXxON983iPB6_yXdz6nj6nYpz1obB3o-e661ytQw48Y5RjGChqtblfWQ/exec";
 
-    if (!uploader.value.trim()) {
-        uploader.focus();
-        uploader.style.borderColor = "#d66";
-        showToast("Please enter your name", "error");
-        return;
-    }
+/* =========================
+   ATTACH REAL UPLOAD
+========================= */
+uploadBtn.onclick = uploadFiles;
 
-    uploader.style.borderColor = "";
+/* =========================
+   UPLOAD CONTROLLER
+========================= */
+async function uploadFiles() {
 
-    if (input.files.length === 0) {
-        showToast("Please select at least one photo", "error");
-        return;
-    }
+    uploadBtn.disabled = true;
 
-    showToast("Uploading memories...", "info");
+    try {
 
-    setTimeout(() => {
+        const files = input.files;
+        const uploaderName = document.getElementById("uploader").value.trim();
+        const guestMessage = document.getElementById("message").value.trim();
+
+        if (!uploaderName) {
+            uploader.focus();
+            uploader.style.borderColor = "#d66";
+            showToast("Please enter your name", "error");
+            return;
+        }
+
+        uploader.style.borderColor = "";
+
+        if (!files.length) {
+            showToast("Please select at least one photo", "error");
+            return;
+        }
+
+        showToast("Uploading memories...", "info");
+
+        for (let file of files) {
+            await uploadSingle(file, uploaderName, guestMessage);
+        }
 
         showToast("Upload successful 💚 Thank you for sharing!", "success");
 
-        input.value = "";
-        preview.innerHTML = "";
-        uploader.value = "";
+        resetAfterUpload();
 
-        previewAllBtn.style.display = "none";
-        allFiles = [];
-        isExpanded = false;
+    } catch (err) {
+        console.error("Upload failed:", err);
+        showToast("Upload failed ❌ Please try again", "error");
+    } finally {
+        uploadBtn.disabled = false;
+    }
+}
 
-    }, 2000);
-});
+/* =========================
+   SINGLE FILE UPLOAD
+========================= */
+function uploadSingle(file, uploaderName, guestMessage) {
+    return new Promise((resolve, reject) => {
+
+        const reader = new FileReader();
+
+        reader.onload = function () {
+
+            const base64Data = reader.result.split(",")[1];
+
+            const formData = new FormData();
+            formData.append("file", base64Data);
+            formData.append("filename", file.name);
+            formData.append("mimeType", file.type);
+            formData.append("uploader", uploaderName);
+            formData.append("message", guestMessage);
+
+            fetch(scriptURL, {
+                method: "POST",
+                body: formData
+            })
+                .then(res => {
+                    if (!res.ok) throw new Error("HTTP error " + res.status);
+                    return res.text();
+                })
+                .then(resolve)
+                .catch(reject);
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+}
+
+/* =========================
+   RESET AFTER UPLOAD
+========================= */
+function resetAfterUpload() {
+    input.value = "";
+    preview.innerHTML = "";
+    uploader.value = "";
+    message.value = "";
+
+    previewAllBtn.style.display = "none";
+    allFiles = [];
+    isExpanded = false;
+}
+
