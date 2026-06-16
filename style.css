@@ -1433,37 +1433,84 @@ button {
 }
 
 /* ==========================================================
-   LIGHTBOX
+   LIGHTBOX (ELEGANT WEDDING STYLE)
 ========================================================== */
 
 .lightbox {
     position: fixed;
     inset: 0;
-    background: rgba(20, 24, 20, .95);
-    /* Richer botanical dark backdrop */
+
     display: none;
     justify-content: center;
     align-items: center;
+
+    background: rgba(47, 54, 45, 0.55); /* artichoke tint */
+    backdrop-filter: blur(10px);
+
     z-index: 9999;
+
+    padding: 25px;
+    animation: fadeIn 0.3s ease;
 }
 
 .lightbox.active {
     display: flex;
 }
 
+/* IMAGE */
 #lightboxImage {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 20px;
+    max-width: 65vw;
+    max-height: 75vh;
+
+    border-radius: 22px;
+
+    background: #fff;
+    padding: 10px;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(212, 175, 55, 0.15);
+
+    transform: scale(0.98);
+    animation: popIn 0.35s ease forwards;
 }
 
+/* CLOSE BUTTON */
 .lightbox-close {
     position: absolute;
-    top: 30px;
-    right: 40px;
-    color: white;
-    font-size: 3rem;
+    top: 25px;
+    right: 30px;
+
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 2.8rem;
+    font-weight: 300;
+
     cursor: pointer;
+
+    transition: 0.3s ease;
+    user-select: none;
+}
+
+.lightbox-close:hover {
+    color: var(--gold);
+    transform: rotate(90deg);
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 /* ==========================================================
@@ -1979,15 +2026,13 @@ button {
 .qr-modal {
     position: fixed;
     inset: 0;
-
     display: none;
     align-items: center;
     justify-content: center;
-
     background: rgba(47, 54, 45, .65);
     backdrop-filter: blur(8px);
-
-    z-index: 9999;
+    z-index: 999999;
+    padding: 20px;
 }
 
 .qr-modal.active {
@@ -1997,32 +2042,31 @@ button {
 /* MODAL CONTENT */
 .qr-modal-content {
     position: relative;
-
-    text-align: center;
-
-    padding: 35px 30px;
-
-    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     background: #fff;
+    border-radius: 25px;
+    padding: 25px;
+
+    z-index: 1000000;
+
+    max-width: 90vw;
+    max-height: 90vh;
 
     box-shadow: 0 25px 70px rgba(0, 0, 0, .25);
-
-    animation: modalPop .3s ease;
 }
 
 /* LARGE QR */
 .qr-modal-content img {
-    width: 320px;
-    max-width: 85vw;
-
-    padding: 15px;
-
+    width: min(320px, 85vw);
+    height: auto;
+    display: block;
+    object-fit: contain;
     border-radius: 18px;
-
     background: #fff;
-
-    border: 1px solid rgba(0, 0, 0, .08);
 }
 
 /* TEXT */
@@ -2038,17 +2082,8 @@ button {
     position: absolute;
     top: 10px;
     right: 15px;
-
     font-size: 2rem;
-
-    background: none;
-    border: none;
-
-    color: var(--artichoke);
-
-    cursor: pointer;
-
-    transition: .3s ease;
+    z-index: 10;
 }
 
 .qr-close:hover {

@@ -603,27 +603,45 @@ document.querySelectorAll(".hero-content *").forEach((el, index) => {
 });
 
 // QR FULLSCREEN MODAL
+document.addEventListener("DOMContentLoaded", () => {
 
-const qrBox = document.getElementById("qrBox");
-const qrModal = document.getElementById("qrModal");
-const qrClose = document.querySelector(".qr-close");
+    const qrBox = document.getElementById("qrBox");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxClose = document.querySelector(".lightbox-close");
 
-// open modal
-qrBox.addEventListener("click", () => {
-    qrModal.classList.add("active");
-});
+    if (qrBox && lightbox && lightboxImage) {
+        qrBox.addEventListener("click", () => {
+            const img = qrBox.querySelector("img");
 
-// close modal (button)
-qrClose.addEventListener("click", () => {
-    qrModal.classList.remove("active");
-});
-
-// close when clicking outside content
-qrModal.addEventListener("click", (e) => {
-    if (e.target === qrModal) {
-        qrModal.classList.remove("active");
+            lightboxImage.src = img.src;
+            lightbox.classList.add("active");
+        });
     }
+
+    if (lightboxClose) {
+        lightboxClose.addEventListener("click", () => {
+            lightbox.classList.remove("active");
+        });
+    }
+
+    if (lightbox) {
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove("active");
+            }
+        });
+    }
+
 });
+
+// const qrImg = document.querySelector("#qrBox img");
+
+// if (qrImg) {
+//     qrImg.addEventListener("click", () => {
+//         qrModal.classList.add("active");
+//     });
+// }
 
 /* ==========================================================
     END
