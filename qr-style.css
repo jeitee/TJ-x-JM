@@ -1,0 +1,245 @@
+:root {
+    --ivory: #FAF7F2;
+    --white: #FFFFFF;
+    --sage: #A3B899;
+    --deep: #6E7F65;
+    --shadow: rgba(0,0,0,0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: var(--ivory);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 18px;
+}
+
+.page {
+    width: 100%;
+    max-width: 520px;
+}
+
+.card {
+    background: var(--white);
+    border-radius: 22px;
+    padding: 22px;
+    box-shadow: 0 20px 60px var(--shadow);
+    border: 1px solid rgba(163, 184, 153, 0.25);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 22px;
+    color: var(--deep);
+}
+
+.header p {
+    font-size: 13px;
+    color: #777;
+    margin-top: 6px;
+}
+
+.upload-box {
+    display: block;
+    border: 2px dashed var(--sage);
+    padding: 18px;
+    border-radius: 16px;
+    text-align: center;
+    cursor: pointer;
+    color: var(--deep);
+    transition: 0.3s;
+}
+
+.upload-box:hover {
+    background: rgba(163, 184, 153, 0.08);
+}
+
+.upload-box input {
+    display: none;
+}
+
+.upload-box small {
+    display: block;
+    font-size: 11px;
+    color: #888;
+    margin-top: 4px;
+}
+
+.preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+    justify-content: center;
+}
+
+.preview img {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+textarea {
+    width: 100%;
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.1);
+    resize: none;
+    font-family: inherit;
+}
+
+button {
+    width: 100%;
+    margin-top: 14px;
+    padding: 12px;
+    border: none;
+    border-radius: 14px;
+    background: var(--deep);
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #5c6f56;
+}
+
+.note {
+    text-align: center;
+    font-size: 11px;
+    color: #999;
+    margin-top: 10px;
+}
+
+.monogram-wrapper {
+    width: 90px;
+    height: 90px;
+
+    max-width: 22vw;
+    max-height: 22vw;
+
+    border-radius: 50%;
+    overflow: hidden;   /* THIS is the key fix */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto 12px auto;
+
+    border: 2px solid #A3B899;
+    background: #fff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.monogram-img {
+    width: 70%;
+    height: 70%;
+
+    object-fit: cover;  /* makes image fill circle properly */
+
+    display: block;
+}
+
+.monogram-img:hover {
+    transform: scale(1.05);
+}
+
+#uploader {
+    width: 100%;
+    padding: 12px 14px;
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+    background: #ffffff;
+
+    font-size: 14px;
+
+    font-family: inherit;
+
+    color: #333;
+
+    outline: none;
+
+    transition: all 0.3s ease;
+
+    margin-top: 12px;
+}
+
+/* focus state */
+#uploader:focus {
+    border-color: #A3B899;
+    box-shadow: 0 0 0 4px rgba(163, 184, 153, 0.15);
+}
+
+/* placeholder styling */
+#uploader::placeholder {
+    color: #999;
+    font-size: 13px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+
+    background: #fff;
+    color: #6E7F65;
+
+    padding: 12px 16px;
+    border-radius: 14px;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+
+    border: 1px solid rgba(163, 184, 153, 0.25);
+
+    font-size: 14px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+
+/* show animation */
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* INFO (default) */
+.toast.info {
+    border-color: rgba(163, 184, 153, 0.25);
+}
+
+/* ERROR */
+.toast.error {
+    color: #a94442;
+    border-color: rgba(214, 102, 102, 0.4);
+}
+
+/* SUCCESS */
+.toast.success {
+    color: #3c7a4a;
+    border-color: rgba(110, 127, 101, 0.4);
+    background: #f6fbf7;
+}

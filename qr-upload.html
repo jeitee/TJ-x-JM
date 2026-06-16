@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Memories</title>
+
+    <link rel="stylesheet" href="qr-style.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <div class="card">
+
+            <div class="header">
+                <div class="monogram-wrapper">
+                    <img src="image/logo.png" alt="Teejei and Judith Wedding Logo" class="monogram-img">
+                </div>
+                <h1>Wedding Memories</h1>
+                <p>We’re so grateful you shared in our special day and made it unforgettable</p>
+            </div>
+
+            <div class="upload-area">
+
+                <label class="upload-box">
+                    <input type="file" id="images" accept="image/*" multiple>
+                    <span>Tap to select photos</span>
+                    <small>JPG, PNG • Multiple allowed</small>
+                </label>
+
+                <div class="preview" id="preview"></div>
+
+                <button type="button" id="previewAllBtn" class="preview-all-btn" style="display:none;">
+                    Preview All
+                </button>
+
+            </div>
+            <input id="uploader" type="text" placeholder="Uploader name" required>
+            <textarea id="message" placeholder="Write a message for the couple (optional)"></textarea>
+
+            <button id="uploadBtn">Upload Memories</button>
+
+            <p class="note">
+                Scan QR → Upload your captured moments instantly
+            </p>
+
+        </div>
+
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="qr-script.js"></script>
+
+
+</body>
+
+</html>

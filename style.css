@@ -1459,8 +1459,14 @@ button {
 
 /* IMAGE */
 #lightboxImage {
-    max-width: 65vw;
-    max-height: 75vh;
+    max-width: 90vw;
+    max-height: 85vh;
+
+    width: auto;
+    height: auto;
+
+    display: block;
+    object-fit: contain;
 
     border-radius: 22px;
 
