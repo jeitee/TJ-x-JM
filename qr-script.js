@@ -105,76 +105,77 @@ async function uploadFiles() {
 
     uploadBtn.disabled = true;
 
+    const files = input.files;
+    const uploaderName = uploader.value.trim();
+
+    if (!uploaderName) {
+        uploader.focus();
+        uploader.style.borderColor = "#d66";
+        showToast("Please enter your name", "error");
+        uploadBtn.disabled = false;
+        return;
+    }
+
+    if (!files.length) {
+        showToast("Please select at least one photo", "error");
+        uploadBtn.disabled = false;
+        return;
+    }
+
+    uploader.style.borderColor = "";
+    showToast("Uploading memories...", "info");
+
     try {
 
-        const files = input.files;
-        const uploaderName = document.getElementById("uploader").value.trim();
-        const guestMessage = document.getElementById("message").value.trim();
+        const uploadTasks = Array.from(files).map((file, index) => {
 
-        if (!uploaderName) {
-            uploader.focus();
-            uploader.style.borderColor = "#d66";
-            showToast("Please enter your name", "error");
-            return;
-        }
+            return new Promise((resolve, reject) => {
 
-        uploader.style.borderColor = "";
+                // ⚡ stagger each request slightly
+                setTimeout(() => {
+                    uploadSingle(file, uploaderName)
+                        .then(resolve)
+                        .catch(reject);
+                }, index * 150);
 
-        if (!files.length) {
-            showToast("Please select at least one photo", "error");
-            return;
-        }
+            });
 
-        showToast("Uploading memories...", "info");
+        });
 
-        for (let file of files) {
-            await uploadSingle(file, uploaderName, guestMessage);
-        }
+        await Promise.all(uploadTasks);
 
         showToast("Upload successful 💚 Thank you for sharing!", "success");
-
         resetAfterUpload();
 
     } catch (err) {
         console.error("Upload failed:", err);
         showToast("Upload failed ❌ Please try again", "error");
-    } finally {
-        uploadBtn.disabled = false;
     }
+
+    uploadBtn.disabled = false;
 }
 
 /* =========================
    SINGLE FILE UPLOAD
 ========================= */
-function uploadSingle(file, uploaderName, guestMessage) {
+function uploadSingle(file, uploaderName) {
     return new Promise((resolve, reject) => {
 
-        const reader = new FileReader();
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("filename", file.name);
+        formData.append("uploader", uploaderName);
 
-        reader.onload = function () {
-
-            const base64Data = reader.result.split(",")[1];
-
-            const formData = new FormData();
-            formData.append("file", base64Data);
-            formData.append("filename", file.name);
-            formData.append("mimeType", file.type);
-            formData.append("uploader", uploaderName);
-            formData.append("message", guestMessage);
-
-            fetch(scriptURL, {
-                method: "POST",
-                body: formData
+        fetch(scriptURL, {
+            method: "POST",
+            body: formData
+        })
+            .then(async (res) => {
+                if (!res.ok) throw new Error("HTTP error " + res.status);
+                return res.text();
             })
-                .then(res => {
-                    if (!res.ok) throw new Error("HTTP error " + res.status);
-                    return res.text();
-                })
-                .then(resolve)
-                .catch(reject);
-        };
-
-        reader.readAsDataURL(file);
+            .then(resolve)
+            .catch(reject);
 
     });
 }
